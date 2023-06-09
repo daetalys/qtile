@@ -25,14 +25,23 @@
 # SOFTWARE.
 
 import os
+import re
+import socket
 import subprocess
+from os import path
 from typing import List  # noqa: F401
+
 from libqtile import bar, layout, widget, hook, qtile, backend
+from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, Rule, KeyChord, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from libqtile.widget import StatusNotifier
-from libqtile.backend.wayland import InputConfig
+
+from qtile_extras import widget
+from qtile_extras.widget.decorations import BorderDecoration, PowerLineDecoration
+
+#from settings.path import qtile_path
+
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -79,7 +88,7 @@ keys = [
 ]
 
 groups = [
-    Group("1"),
+    Group("1", matches=[Match(wm_class=["lapce", "vscodium", "VSCodium"])]),
     Group("2", matches=[Match(wm_class=["Navigator", "firefox", "brave-browser", "Brave-browser"])]),
     Group("3", matches=[Match(wm_class=["Mail", "thunderbird"])]),
     Group("4"),
@@ -87,7 +96,7 @@ groups = [
     Group("6"),
     Group("7"),
     Group("8"),
-    Group("9")
+    Group("9", matches=[Match(wm_class=["bitwarden", "protonmail-bridge", "protonvpn", "qbittorrent", "seahorse", "Tor Browser"])]),
     ]
 
 for i in groups:
@@ -190,8 +199,8 @@ screens = [
                 widget.PulseVolume(
                     emoji='True'
                 ),
-                widget.StatusNotifier(),
-                #widget.Systray(),
+#                widget.StatusNotifier(),
+                widget.Systray(),
                 widget.Clock(
                     foreground='ff00ff',
                     format='%a %Y%m%d %T'
@@ -199,7 +208,6 @@ screens = [
                 widget.CheckUpdates(
                     colour_have_updates='00ffff',
                     colour_no_updates='008080',
-                    #display_format='🔁 {updates}',
                     distro='Arch_checkupdates',
                     font='mono',
                     foreground='33ff33',
@@ -252,34 +260,33 @@ auto_minimize = True
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = {
     "type:touchpad": InputConfig(tap=True),
-    # Add additional rules here if needed...
 }
 
 #@hook.subscribe.startup_once
 #def start_once():
 #    home = os.path.expanduser('~')
 #    subprocess.call([home + '/.config/qtile/autostart.sh'])
-def start_programs():
-    # Set your wallpaper with feh. Replace /path/to/wallpaper.jpg with your actual file
-    subprocess.Popen(['feh', '--bg-scale', '$HOME/Pictures/wallpapers/2D7478E3-402D-4C8B-AB1C-032F461A9BB5.jpg'])
-
-    # Start the following programs
-    programs = [
-        'pipewire',
-        'pipewire-pulse',
-        'wireplumber',
-        'nm-applet',
-        'kdeconnectd',
-        'kdeconnect-indicator',
-        'dunst',
-    ]
-
-    for prog in programs:
-        subprocess.Popen(prog)
-
-@hook.subscribe.startup
-def startup():
-    start_programs()
+#def start_programs():
+#    # Set your wallpaper with feh. Replace /path/to/wallpaper.jpg with your actual file
+#    subprocess.Popen(['feh', '--bg-scale', '$HOME/Pictures/wallpapers/2D7478E3-402D-4C8B-AB1C-032F461A9BB5.jpg'])
+#
+#    # Start the following programs
+#    programs = [
+#        'pipewire',
+#        'pipewire-pulse',
+#        'wireplumber',
+#        'nm-applet',
+#        'kdeconnectd',
+#        'kdeconnect-indicator',
+#        'dunst',
+#    ]
+#
+#    for prog in programs:
+#        subprocess.Popen(prog)
+#
+#@hook.subscribe.startup
+#def startup():
+#    start_programs()
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
