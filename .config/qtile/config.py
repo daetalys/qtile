@@ -85,6 +85,10 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "p", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    # Sound
+    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 1- unmute")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 1+ unmute")),
 ]
 
 groups = [
@@ -156,7 +160,7 @@ screens = [
                 widget.CurrentLayoutIcon(),
                 widget.GroupBox(
                     borderwidth=2,
-                    font="serif",
+#                    font="serif",
                     hide_unused="True",
                     highlight_color="6298e0",
                     highlight_method="border",
@@ -171,7 +175,7 @@ screens = [
                 widget.TaskList(
                     border="6298e0",
                     borderwidth=2,
-                    font="serif",
+#                    font="serif",
                     highlight_method="border",
                     theme_mode="preferred"
                 ),
@@ -196,11 +200,9 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.PulseVolume(
-                    emoji='True'
-                ),
+                widget.PulseVolume(),
 #                widget.StatusNotifier(),
-                widget.Systray(),
+#                widget.Systray(),
                 widget.Clock(
                     foreground='ff00ff',
                     format='%a %Y%m%d %T'
