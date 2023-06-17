@@ -92,15 +92,15 @@ keys = [
 ]
 
 groups = [
-    Group("1", matches=[Match(wm_class=["lapce", "vscodium", "VSCodium"])]),
-    Group("2", matches=[Match(wm_class=["Navigator", "firefox", "brave-browser", "Brave-browser"])]),
-    Group("3", matches=[Match(wm_class=["Mail", "thunderbird"])]),
-    Group("4"),
-    Group("5"),
-    Group("6"),
-    Group("7"),
-    Group("8"),
-    Group("9", matches=[Match(wm_class=["bitwarden", "protonmail-bridge", "protonvpn", "qbittorrent", "seahorse", "Tor Browser"])]),
+    Group("1", label=">_", matches=[Match(wm_class=["lapce", "vscodium", "VSCodium"])]),
+    Group("2", label="🌐", layout="columns", matches=[Match(wm_class=["Navigator", "firefox", "Tor Browser", "brave-browser", "Brave-browser", "mullvadbrowser"])]),
+    Group("3", label="📧", matches=[Match(wm_class=["Mail", "thunderbird"])]),
+    Group("4", label="💬", layout="matrix"),
+    Group("5", label="🎮"),
+    Group("6", label="🎭"),
+    Group("7", label="📁", matches=[Match(wm_class=["spacfm"])]),
+    Group("8", label="🔑", matches=[Match(wm_class=["bitwarden", "protonmail-bridge", "protonvpn", "seahorse"])]),
+    Group("9", label="🧅", matches=[Match(wm_class=["qbittorrent"])]),
     ]
 
 for i in groups:
@@ -186,13 +186,13 @@ screens = [
                     threshold=160
                 ),
                 widget.CPU(
-                    foreground='33ff33'
+                    foreground='008800'
                 ),
                 widget.Memory(
-                    foreground='ffff00'
+                    foreground='888800'
                 ),
                 widget.Net(
-                    foreground='0000ff'
+                    foreground='000088'
                 ),
                 widget.Chord(
                     chords_colors={
@@ -200,14 +200,10 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.PulseVolume(),
-#                widget.StatusNotifier(),
-#                widget.Systray(),
-                widget.Clock(
-                    foreground='ff00ff',
-                    format='%a %Y%m%d %T'
-                ),
-                widget.CheckUpdates(
+                widget.PulseVolume(
+                    foreground='880088'
+                    ),
+               widget.CheckUpdates(
                     colour_have_updates='00ffff',
                     colour_no_updates='008080',
                     distro='Arch_checkupdates',
@@ -215,7 +211,13 @@ screens = [
                     foreground='33ff33',
                     no_update_string='Updates: 0',
                 ),
-                widget.QuickExit(
+                # widget.StatusNotifier(),
+                # widget.Systray(),
+                widget.Clock(
+                    # foreground='33ff33',
+                    format='%a %Y%m%d %T'
+                ),
+               widget.QuickExit(
                     default_text='[X]',
                     countdown_format='[{}]'
                 ),
