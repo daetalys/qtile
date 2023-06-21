@@ -45,6 +45,8 @@ from qtile_extras.widget.decorations import BorderDecoration, PowerLineDecoratio
 
 mod = "mod4"
 terminal = guess_terminal()
+browser = "brave"
+fileManager = "spacefm"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -79,6 +81,8 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "b", lazy.spawn(browser), desc="Launch Browser"),
+    Key([mod], "e", lazy.spawn(fileManager), desc="Launch File Manager"),
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "control"], "c", lazy.window.kill(), desc="Kill focused window"),
@@ -241,18 +245,36 @@ dgroups_app_rules = []  # type: List
 follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
-ffloating_layout = layout.Floating(
+floating_layout = layout.Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
+        Match(role="AlarmWindow"), # Thunderbird's calendar.
+        Match(role="ConfigManager"), # Thunderbird's about:config.
+        Match(role="pop-up"),
+        Match(title="branchdialog"),  # gitk
+        Match(title="Event Tester"), # xev
+        Match(title="pinentry"),  # GPG key password entry
+        Match(wm_class="Arandr"),
+        Match(wm_class="Blueman-manager"),
         Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="copyq"), #Includes session name in class
+        Match(wm_class="DTA"), # Firefox addon DownThemAll
+        Match(wm_class="Gpick"),
+        Match(wm_class="Kruler"),
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
+        Match(wm_class="MessageWin"), # kalarm
+        Match(wm_class="pinentry"),
         Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(title="branchdialog"),  # gitk
-        Match(title="pinentry"),  # GPG key password entry
+        Match(wm_class="Sxiv"),
+        Match(wm_class="Tor Browser"), # Needs a fixed window size to avoid fingerprinting by screen size.
+        Match(wm_class="veromix"),
+        Match(wm_class="Wpa_gui"),
+        Match(wm_class="xtightvncviewer"),
     ]
 )
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
