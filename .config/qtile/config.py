@@ -216,7 +216,7 @@ screens = [
                     no_update_string='Updates: 0',
                 ),
                 # widget.StatusNotifier(),
-                # widget.Systray(),
+                widget.Systray(),
                 widget.Clock(
                     # foreground='33ff33',
                     format='%a %Y%m%d %T'
@@ -288,31 +288,10 @@ wl_input_rules = {
     "type:touchpad": InputConfig(tap=True),
 }
 
-#@hook.subscribe.startup_once
-#def start_once():
-#    home = os.path.expanduser('~')
-#    subprocess.call([home + '/.config/qtile/autostart.sh'])
-#def start_programs():
-#    # Set your wallpaper with feh. Replace /path/to/wallpaper.jpg with your actual file
-#    subprocess.Popen(['feh', '--bg-scale', '$HOME/Pictures/wallpapers/2D7478E3-402D-4C8B-AB1C-032F461A9BB5.jpg'])
-#
-#    # Start the following programs
-#    programs = [
-#        'pipewire',
-#        'pipewire-pulse',
-#        'wireplumber',
-#        'nm-applet',
-#        'kdeconnectd',
-#        'kdeconnect-indicator',
-#        'dunst',
-#    ]
-#
-#    for prog in programs:
-#        subprocess.Popen(prog)
-#
-#@hook.subscribe.startup
-#def startup():
-#    start_programs()
+@hook.subscribe.startup_once
+def start_once():
+    home = os.path.expanduser('~')
+    subprocess.call([home + '/.config/qtile/autostart.sh'])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
