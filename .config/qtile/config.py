@@ -42,11 +42,10 @@ from qtile_extras.widget.decorations import BorderDecoration, PowerLineDecoratio
 
 #from settings.path import qtile_path
 
-
 mod = "mod4"
 terminal = guess_terminal()
 browser = "brave"
-fileManager = "spacefm"
+fileManager = "pcmanfm"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -151,7 +150,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='mono',
+    font='FiraCode Nerd Font Mono',
     fontsize=12,
     padding=3,
 )
@@ -161,10 +160,13 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.CurrentLayoutIcon(),
+               widget.Image(
+                       filename = "~/.config/qtile/logo.png",
+                       scale = "false",
+                       ),
                 widget.GroupBox(
                     borderwidth=2,
-#                    font="serif",
+                    font="FiraCode Nerd Font Mono",
                     hide_unused="True",
                     highlight_color="6298e0",
                     highlight_method="border",
@@ -179,52 +181,53 @@ screens = [
                 widget.TaskList(
                     border="6298e0",
                     borderwidth=2,
-#                    font="serif",
+                    font="serif",
                     highlight_method="border",
                     theme_mode="preferred"
                 ),
-                widget.ThermalSensor(
-                    foreground='880000',
-                    foreground_alrt='ff0000',
-                    metric=False,
-                    threshold=160
-                ),
-                widget.CPU(
-                    foreground='008800'
-                ),
-                widget.Memory(
-                    foreground='888800'
-                ),
-                widget.Net(
-                    foreground='000088'
-                ),
+                # widget.ThermalSensor(
+                #     foreground='880000',
+                #     foreground_alrt='ff0000',
+                #     metric=False,
+                #     threshold=160
+                # ),
+                # widget.CPU(
+                #     foreground='008800'
+                # ),
+                # widget.Memory(
+                #     foreground='888800'
+                # ),
+                # widget.Net(
+                #     foreground='000088'
+                # ),
                 widget.Chord(
                     chords_colors={
                         'launch': ("#ff0000", "#ffffff"),
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.PulseVolume(
-                    foreground='880088'
-                    ),
+                # widget.PulseVolume(
+                #     foreground='880088'
+                #     ),
                widget.CheckUpdates(
-                    colour_have_updates='00ffff',
+                    colour_have_updates='ffffff', #'00ffff',
                     colour_no_updates='008080',
                     distro='Arch_checkupdates',
-                    font='mono',
+                    font='FiraCode Nerd Font Mono',
                     foreground='33ff33',
-                    no_update_string='Updates: 0',
+                    no_update_string='', #'Updates: 0',
                 ),
                 # widget.StatusNotifier(),
-                widget.Systray(),
+                # widget.Systray(),
                 widget.Clock(
                     # foreground='33ff33',
-                    format='%a %Y%m%d %T'
+                    format='⏱ %a %Y%m%d %T'
                 ),
-               widget.QuickExit(
-                    default_text='[X]',
-                    countdown_format='[{}]'
-                ),
+               # widget.QuickExit(
+               #      default_text='[X]',
+               #      countdown_format='[{}]'
+               #  ),
+                widget.CurrentLayoutIcon(),
             ],
             24,
             border_width=[1, 0, 1, 0],  # Draw top and bottom borders
