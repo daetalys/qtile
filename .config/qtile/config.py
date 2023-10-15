@@ -80,8 +80,26 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "b", lazy.spawn(browser), desc="Launch Browser"),
-    Key([mod], "e", lazy.spawn(fileManager), desc="Launch File Manager"),
+#    Key([mod], "b", lazy.spawn(browser), desc="Launch Browser"),
+    # Define a key chord for launching browsers
+    KeyChord([mod], "b", [
+        Key([], "b", lazy.spawn("mullvad-exclude brave"), desc='Brave Browser, split-tunneled'),
+        Key([], "d", lazy.spawn("firedragon"), desc='FireDragon'),
+        Key([], "f", lazy.spawn("firefox"), desc='Firefox'),
+        Key([], "l", lazy.spawn("librewolf"), desc='LibreWolf'),
+        Key([], "m", lazy.spawn("mullvad-browser"), desc='Mullvad Browser'),
+        Key([], "t", lazy.spawn("mullvad-exclude torbrowser-launcher"), desc='Tor Browser'),
+    ]),
+#    Key([mod], "e", lazy.spawn(fileManager), desc="Launch File Manager"),
+    # Define a key chord for launching file explorers
+    KeyChord([mod], "e", [
+        Key([], "l", lazy.spawn("foot -e lf"), desc='Launch lf in terminal'),
+        Key([], "m", lazy.spawn("foot -e mc"), desc='Launch Midnight Commander in terminal'),
+        Key([], "p", lazy.spawn("pcmanfm"), desc='Launch PCManFM'),
+        Key([], "r", lazy.spawn("foot -e ranger"), desc='Launch Ranger in terminal'),
+        Key([], "s", lazy.spawn("spacefm"), desc='Launch SpaceFM'),
+        Key([], "v", lazy.spawn("foot -e vifm"), desc='Launch Vifm in terminal'),
+    ]),
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "control"], "c", lazy.window.kill(), desc="Kill focused window"),
