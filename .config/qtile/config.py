@@ -115,7 +115,7 @@ keys = [
 groups = [
     Group("1", label=">_", matches=[Match(wm_class=["lapce", "vscodium", "VSCodium"])]),
     Group("2", label="🌐", layout="columns", matches=[Match(wm_class=["Navigator", "firefox", "Tor Browser", "brave-browser", "Brave-browser", "mullvadbrowser"])]),
-    Group("3", label="📧", matches=[Match(wm_class=["Mail", "thunderbird"])]),
+    Group("3", label="📧", layout="max", matches=[Match(wm_class=["Mail", "thunderbird"])]),
     Group("4", label="💬", layout="matrix"),
     Group("5", label="🎮"),
     Group("6", label="🎭"),
@@ -235,7 +235,9 @@ screens = [
                     foreground='33ff33',
                     no_update_string='', #'Updates: 0',
                 ),
-                # widget.StatusNotifier(),
+                widget.StatusNotifier(
+                        icon_theme='beautyline'
+                        ),
                 # widget.Systray(),
                 widget.Clock(
                     # foreground='33ff33',
@@ -311,8 +313,33 @@ wl_input_rules = {
 
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+    # home = os.path.expanduser('~')
+    # subprocess.call([home + '/.config/qtile/autostart.sh'])
+    def run(command):
+        print(f"Starting {command}")  # Debugging output
+        if subprocess.run(["pgrep", "-f", command], stdout=subprocess.DEVNULL).returncode != 0:
+            process = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            output, error = process.communicate()
+            if error:
+                print(f"Error starting {command}: {error.decode()}")  # Log errors
+
+    commands = [
+        "polkit-qt5",
+        "pipewire",
+        "kdeconnectd",
+        "pipewire-pulse",
+        "mako",
+        "wireplumber",
+        "protonmail-bridge",
+        "kdeconnect-indicator",
+        "nm-applet",
+        "pa-applet"
+    ]
+
+    for command in commands:
+        run(command)
+
+    print("Startup applications launched.")  # Final message
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
