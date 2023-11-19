@@ -12,8 +12,6 @@ run wireplumber &
 run pa-applet &
 run nm-applet &
 run polkit-qt5 &
-# run lxpolkit &
-# run lxsession &
 run kdeconnectd &
 run kdeconnect-indicator &
 run mako &

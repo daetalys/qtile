@@ -313,33 +313,8 @@ wl_input_rules = {
 
 @hook.subscribe.startup_once
 def start_once():
-    # home = os.path.expanduser('~')
-    # subprocess.call([home + '/.config/qtile/autostart.sh'])
-    def run(command):
-        print(f"Starting {command}")  # Debugging output
-        if subprocess.run(["pgrep", "-f", command], stdout=subprocess.DEVNULL).returncode != 0:
-            process = subprocess.Popen(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            output, error = process.communicate()
-            if error:
-                print(f"Error starting {command}: {error.decode()}")  # Log errors
-
-    commands = [
-        "polkit-qt5",
-        "pipewire",
-        "kdeconnectd",
-        "pipewire-pulse",
-        "mako",
-        "wireplumber",
-        "protonmail-bridge",
-        "kdeconnect-indicator",
-        "nm-applet",
-        "pa-applet"
-    ]
-
-    for command in commands:
-        run(command)
-
-    print("Startup applications launched.")  # Final message
+    home = os.path.expanduser('~')
+    subprocess.call([home + '/.config/qtile/autostart.sh'])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
