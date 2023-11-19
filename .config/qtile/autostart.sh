@@ -11,7 +11,10 @@ run pipewire-pulse &
 run wireplumber &
 run pa-applet &
 run nm-applet &
-run lxpolkit &
+run polkit-qt5 &
+# run lxpolkit &
+# run lxsession &
 run kdeconnectd &
 run kdeconnect-indicator &
 run mako &
+run protonmail-bridge &
