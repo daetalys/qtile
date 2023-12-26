@@ -176,12 +176,14 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
+#        wallpaper=os.path.join(os.path.expanduser("~"), "Pictures/wallpapers/blackarch.jpg"),
+#        wallpaper_mode="fill",
         top=bar.Bar(
             [
-               widget.Image(
-                       filename = "~/.config/qtile/logo.png",
-                       scale = "false",
-                       ),
+               # widget.Image(
+               #         filename = "~/.config/qtile/logo.png",
+               #         scale = "false",
+               #         ),
                 widget.GroupBox(
                     borderwidth=2,
                     font="FiraCode Nerd Font Mono",

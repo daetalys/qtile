@@ -15,4 +15,4 @@ run polkit-qt5 &
 run kdeconnectd &
 run kdeconnect-indicator &
 run mako &
-run protonmail-bridge &
+# run protonmail-bridge &
